@@ -5,9 +5,14 @@ class Play extends Phaser.Scene{
     preload(){
         this.load.image('platform', './assets/platform.png');
         this.load.image('player', './assets/player.png');
+        this.load.image('oceanfield', './assets/oceanfield.png');
+        this.load.atlas('seahorse', './assets/seahorse.png', './assets/seahorse.json');
     }
 
     create(){
+
+        this.oceanfield = this.add.tileSprite(0,0, game.config.width, game.config.height, 'oceanfield').setOrigin(0,0);
+
  
         // group with all active platforms.
         this.platformGroup = this.add.group({
@@ -27,21 +32,33 @@ class Play extends Phaser.Scene{
             }
         });
  
-        // number of consecutive jumps made by the player
-        this.playerJumps = 0;
- 
+
         // adding a platform to the game, the arguments are platform width and x position
         this.addPlatform(game.config.width, game.config.width / 2);
  
         // adding the player;
-        this.player = this.physics.add.sprite(game.settings.playerStartPosition, game.config.height / 2, "player");
-        this.player.setGravityY(game.settings.playerGravity);
- 
+        this.horse = new Seahorse(this,game.settings.playerStartPosition, game.config.height / 2, 'seahorse', 0 );
+        
+        this.anims.create({
+            key: 'move',
+            frames: this.anims.generateFrameNames('seahorse', {
+                prefix: 'run', 
+                start: 0, 
+                end: 19, 
+                first: 0, 
+                zeroPad: 2}),
+                frameRate: 10,
+                repeat: -1
+        });
+
+        this.horse.myArcadeBody.anims.play('move');
+
+       
         // setting collisions between the player and the platform group
-        this.physics.add.collider(this.player, this.platformGroup);
- 
-        // checking for input
+        this.physics.add.collider(this.horse.myArcadeBody, this.platformGroup);
+
         this.input.on("pointerdown", this.jump, this);
+ 
     }
     // platforms are added from the pool or generated
     addPlatform(platformWidth, posX){
@@ -62,22 +79,28 @@ class Play extends Phaser.Scene{
         platform.displayWidth = platformWidth;
         this.nextPlatformDistance = Phaser.Math.Between(game.settings.spawnRange[0], game.settings.spawnRange[1]);
     }
-    //the player jumps when on the ground, or in the air if any jumps are left
+
     jump(){
-        if(this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < game.settings.jumps)){
-            if(this.player.body.touching.down){
-                this.playerJumps = 0;
+        if(this.horse.myArcadeBody.body.touching.down || (this.playerJumps > 0 && this.playerJumps < game.settings.jumps)){
+            if(this.horse.myArcadeBody.body.touching.down){
+                this.horse.playerJumps = 0;
             }
-            this.player.setVelocityY(game.settings.jumpForce * -1);
-            this.playerJumps++;
+            this.horse.myArcadeBody.setVelocityY(game.settings.jumpForce * -1);
+            this.horse.playerJumps++;
         }
     }
+    
     update(){
         //game over
-        if(this.player.y > game.config.height){
+        if(this.horse.myArcadeBody.y > game.config.height){
             this.scene.restart();
         }
-        this.player.x = game.settings.playerStartPosition;
+
+        this.oceanfield.tilePositionX -= 1;
+
+        this.horse.myArcadeBody.x = game.settings.playerStartPosition;
+
+        //this.horse.update();
 
         //recyling platforms
         let minDistance = game.config.width;
