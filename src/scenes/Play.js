@@ -37,7 +37,7 @@ class Play extends Phaser.Scene{
         this.addPlatform(game.config.width, game.config.width / 2);
  
         // adding the player;
-        this.horse = new Seahorse(this,game.settings.playerStartPosition, game.config.height / 2, 'seahorse', 0 );
+        this.horse = new Seahorse(this,game.settings.playerStartPosition, game.config.height * 0.7 , 'seahorse', 0 );
         
         this.anims.create({
             key: 'move',
@@ -73,7 +73,7 @@ class Play extends Phaser.Scene{
         else{
             platform = this.physics.add.sprite(posX, game.config.height * 0.8, "platform");
             platform.setImmovable(true);
-            platform.setVelocityX(game.settings.platformStartSpeed * -1);
+            platform.setVelocityX(game.settings.platformStartSpeed * - 1);
             this.platformGroup.add(platform);
         }
         platform.displayWidth = platformWidth;
@@ -81,12 +81,13 @@ class Play extends Phaser.Scene{
     }
 
     jump(){
-        if(this.horse.myArcadeBody.body.touching.down || (this.playerJumps > 0 && this.playerJumps < game.settings.jumps)){
+        if(this.horse.myArcadeBody.body.touching.down || (this.horse.playerJumps > 0 && this.horse.playerJumps < game.settings.jumps)){
             if(this.horse.myArcadeBody.body.touching.down){
-                this.horse.playerJumps = 0;
+                this.horse.playerJumps = 0;  
             }
             this.horse.myArcadeBody.setVelocityY(game.settings.jumpForce * -1);
             this.horse.playerJumps++;
+            
         }
     }
     
@@ -96,12 +97,11 @@ class Play extends Phaser.Scene{
             this.scene.restart();
         }
 
-        this.oceanfield.tilePositionX -= 1;
+        this.oceanfield.tilePositionX -= 0;
 
-        this.horse.myArcadeBody.x = game.settings.playerStartPosition;
-
-        //this.horse.update();
-
+        this.horse.update();
+        
+        
         //recyling platforms
         let minDistance = game.config.width;
         this.platformGroup.getChildren().forEach(function(platform){
@@ -117,6 +117,8 @@ class Play extends Phaser.Scene{
             var nextPlatformWidth = Phaser.Math.Between(game.settings.platformSizeRange[0],game.settings.platformSizeRange[1]);
             this.addPlatform(nextPlatformWidth, game.config.width + nextPlatformWidth / 2);
         }
+        
+
     }
 
 

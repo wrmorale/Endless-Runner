@@ -8,8 +8,9 @@ class Seahorse extends Phaser.GameObjects.Sprite{
         
         // number of consecutive jumps made by the player
         this.playerJumps = 0;
-        this.myArcadeBody.body.setGravityY(game.settings.playerGravity);
-       // this.horse.setGravityY(game.settings.playerGravity);
+        this.myArcadeBody.setGravityY(game.settings.playerGravity);
+
+        
 
 
     }
@@ -17,7 +18,8 @@ class Seahorse extends Phaser.GameObjects.Sprite{
 
     update(){
         
-        this.horse.x = game.settings.playerStartPosition;
+        this.myArcadeBody.x = game.settings.playerStartPosition;
+        this.myArcadeBody.setVelocityX(game.settings.platformStartSpeed * 1);
     }
 
 }
