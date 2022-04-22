@@ -1,0 +1,19 @@
+{"frames":
+[{"filename":
+"jellyfish0",
+"frame":{"x":20,"y":25,"w":132,"h":102},
+"rotated":false,
+"trimmed":false,
+"spriteSourceSize":{"x":0,"y":0,"w":132,"h":102},
+"sourceSize":{"w":132,"h":102}},
+{"filename":"jellyfish1",
+"frame":{"x":23,"y":203,"w":127,"h":103},
+"rotated":false,
+"trimmed":false,
+"spriteSourceSize":{"x":0,"y":0,"w":127,"h":103},
+"sourceSize":{"w":127,"h":103}}],
+"meta":
+{"app":"https://www.leshylabs.com/apps/sstool/",
+    "version":"Leshy SpriteSheet Tool v0.8.4",
+    "image":"jellyfishplatform.png",
+    "size":{"w":180,"h":360},"scale":1}}

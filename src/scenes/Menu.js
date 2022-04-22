@@ -31,7 +31,7 @@ class Menu extends Phaser.Scene{
 
         if(Phaser.Input.Keyboard.JustDown(keySpace)){
             game.settings = {
-                platformStartSpeed: 250, 
+                platformStartSpeed: 350, 
                 spawnRange: [100, 350],
                 platformSizeRange:[50,250], 
                 playerGravity: 900, 
