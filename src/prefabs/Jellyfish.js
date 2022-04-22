@@ -57,7 +57,7 @@ class Jellyfish extends Phaser.GameObjects.Sprite{
         else{
             platform = this.scene.physics.add.sprite(posX, posY, this.texture);
             platform.setImmovable(true);
-            //platform.setSize(platformWidth - 5);
+            platform.setSize(100, 80);
             platform.setVelocityX(game.settings.platformStartSpeed * - 1);
             this.group.add(platform);
         }
