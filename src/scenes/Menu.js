@@ -21,15 +21,17 @@ class Menu extends Phaser.Scene{
 
         // menu text
 
-        this.add.text(game.config.width/2, game.config.height/2,' Press Space to start', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2,' Press Space to start \n or press/click the screen', menuConfig).setOrigin(0.5);
 
         //define key
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
+        this.pointer = this.input.activePointer;
+
     }
     update(){
 
-        if(Phaser.Input.Keyboard.JustDown(keySpace)){
+        if(Phaser.Input.Keyboard.JustDown(keySpace) || this.pointer.isDown ){
             game.settings = {
                 platformStartSpeed: 350, 
                 //spawn range, how far the rightmost platform should be from the right edge
