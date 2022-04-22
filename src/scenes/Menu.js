@@ -32,11 +32,24 @@ class Menu extends Phaser.Scene{
         if(Phaser.Input.Keyboard.JustDown(keySpace)){
             game.settings = {
                 platformStartSpeed: 350, 
-                spawnRange: [100, 350],
-                platformSizeRange:[50,250], 
-                playerGravity: 900, 
+                //spawn range, how far the rightmost platform should be from the right edge
+                //before the next platform spawns in
+                spawnRange: [80, 300],
+                //platform width range, might be useless in my implementation
+                platformSizeRange:[90,300],
+                //a height range between rightmost platform and next platform to be spawned
+                platformHeightRange: [-5,5],
+                //a scale to be multiplied by platform HeightRange
+                platformHeightScale: 20, 
+                //platform max and min height
+                platformVerticalLimit: [0.4,0.8],
+                //player Gravity
+                playerGravity: 900,
+                //player jump force 
                 jumpForce: 400, 
+                //player starting x position
                 playerStartPosition: 200, 
+                //consecutive jumps allowed
                 jumps: 2
             }
             this.scene.start('playScene');

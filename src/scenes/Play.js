@@ -7,6 +7,7 @@ class Play extends Phaser.Scene{
         this.load.image('platform', './assets/platform.png');
         this.load.image('player', './assets/player.png');
         this.load.image('oceanfield', './assets/oceanfield.png');
+        this.load.image('oceanfield2', './assets/oceanfield2.png');
         this.load.atlas('seahorse', './assets/seahorse.png', './assets/seahorse.json');
         this.load.atlas('jellyfish', './assets/jellyfishplatform.png', './assets/jellyfish.json');
 
@@ -16,7 +17,9 @@ class Play extends Phaser.Scene{
 
     create(){
 
-        this.oceanfield = this.add.tileSprite(0,0, game.config.width, game.config.height, 'oceanfield').setOrigin(0,0);
+        this.oceanfield =  this.add.tileSprite(0,0, game.config.width, game.config.height, 'oceanfield').setOrigin(0,0);
+        this.oceanfield2 = this.add.tileSprite(0,0, game.config.width, game.config.height, 'oceanfield2').setOrigin(0,0);
+
 
  
         // group with all active platforms.
@@ -38,13 +41,11 @@ class Play extends Phaser.Scene{
             }
 
         });
-        //this.physics.add.sprite(posX, game.config.height * 0.8, "jellyfish")
-        this.jellyfish = new Jellyfish(this, this.platformPool, this.platformGroup, 'jellyfish' );
 
-        // adding a platform to the game, the arguments are platform width and x position
-        //this.addPlatform(game.config.width, game.config.width / 2);
+        //add platform instances
+        this.jellyfish = new Jellyfish(this, this.platformPool, this.platformGroup, 'jellyfish' );
         
-        this.jellyfish.addPlatform(game.config.width, game.config.width/2);
+        this.jellyfish.addPlatform(game.config.width, game.config.width/2, game.config.height * game.settings.platformVerticalLimit[1] );
 
         // adding the player;
         this.horse = new Seahorse(this,game.settings.playerStartPosition, game.config.height * 0.7 , 'seahorse', 0 );
@@ -106,18 +107,13 @@ class Play extends Phaser.Scene{
         }
 
         this.oceanfield.tilePositionX += .5;
+        this.oceanfield2.tilePositionX -= .5;
 
         this.horse.update();
         
         this.jellyfish.update();        
 
-        
-
     }
-
-
-    
-
 
 }
 
