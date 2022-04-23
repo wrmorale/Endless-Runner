@@ -11,6 +11,8 @@ class Seahorse extends Phaser.GameObjects.Sprite{
         // number of consecutive jumps made by the player
         this.playerJumps = 0;
 
+        this.playerHadJumped = false;
+
     }
 
     //the player jumps when on the ground, or in the air if any jumps are left            

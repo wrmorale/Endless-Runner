@@ -82,15 +82,15 @@ class Play extends Phaser.Scene{
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.horse.myArcadeBody, this.platformGroup);
 
-        this.horse.myArcadeBody.setBounceY(0.5);
+       
 
         this.input.on("pointerdown", this.jump, this);
- 
+        //this.horse.myArcadeBody.setBounceY(1);
     }
 
     jump(){
         
-        if(!this.horse.myArcadeBody.body.touching.down || (this.horse.playerJumps > 0 && this.horse.playerJumps < game.settings.jumps)){
+        if(this.horse.myArcadeBody.body.touching.down || (this.horse.playerJumps > 0 && this.horse.playerJumps < game.settings.jumps)){
             
             if(this.horse.myArcadeBody.body.touching.down){
                 this.horse.playerJumps = 0;  
@@ -108,7 +108,7 @@ class Play extends Phaser.Scene{
         if(this.horse.myArcadeBody.y > game.config.height){
             this.scene.restart();
         }
-
+        console.log('player jumps ' + this.horse.playerJumps);
         this.oceanfield.tilePositionX += .5;
         this.oceanfield2.tilePositionX -= .5;
 
