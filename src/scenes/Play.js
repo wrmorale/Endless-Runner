@@ -10,6 +10,7 @@ class Play extends Phaser.Scene{
         this.load.image('oceanfield2', './assets/oceanfield2.png');
         this.load.atlas('seahorse', './assets/seahorse.png', './assets/seahorse.json');
         this.load.atlas('jellyfish', './assets/jellyfishplatform.png', './assets/jellyfish.json');
+        this.load.atlas('jellyfishPink', './assets/jellyfishPink.png', './assets/jellyfishPink.json');
 
 
 
@@ -43,7 +44,7 @@ class Play extends Phaser.Scene{
         });
 
         //add platform instances
-        this.jellyfish = new Jellyfish(this, this.platformPool, this.platformGroup, 'jellyfish' );
+        this.jellyfish = new Jellyfish(this, this.platformPool, this.platformGroup, 'jellyfishPink' );
         
         this.jellyfish.addPlatform(game.config.width, game.config.width/2, game.config.height * game.settings.platformVerticalLimit[1] );
 
@@ -81,13 +82,15 @@ class Play extends Phaser.Scene{
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.horse.myArcadeBody, this.platformGroup);
 
+        this.horse.myArcadeBody.setBounceY(0.5);
+
         this.input.on("pointerdown", this.jump, this);
  
     }
 
     jump(){
         
-        if(this.horse.myArcadeBody.body.touching.down || (this.horse.playerJumps > 0 && this.horse.playerJumps < game.settings.jumps)){
+        if(!this.horse.myArcadeBody.body.touching.down || (this.horse.playerJumps > 0 && this.horse.playerJumps < game.settings.jumps)){
             
             if(this.horse.myArcadeBody.body.touching.down){
                 this.horse.playerJumps = 0;  

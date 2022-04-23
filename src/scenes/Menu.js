@@ -48,9 +48,9 @@ class Menu extends Phaser.Scene{
                 //player Gravity
                 playerGravity: 900,
                 //player jump force 
-                jumpForce: 400, 
+                jumpForce: 500, 
                 //player starting x position
-                playerStartPosition: 200, 
+                playerStartPosition: 150, 
                 //consecutive jumps allowed
                 jumps: 2
             }
