@@ -11,7 +11,7 @@ class Menu extends Phaser.Scene{
             fontSize: '24px',
             backgroundColor: 'red',
             color: 'black',
-            align: 'right',
+            align: 'center',
             padding: {
                 top: 5,
                 bottom: 5,
@@ -21,7 +21,7 @@ class Menu extends Phaser.Scene{
 
         // menu text
 
-        this.add.text(game.config.width/2, game.config.height/2,' Press Space to start \n or press/click the screen', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2,' Press Space to start \n or click the screen \n \n click the screen to jump up to two times', menuConfig).setOrigin(0.5);
 
         //define key
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
